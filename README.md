@@ -84,24 +84,31 @@ This is the detailed list of all the datasets and their download links.
 | WORD | https://github.com/HiLab-git/WORD} |
 
 # Step 2: Preprocess datasets with uniform format
-For each dataset, we need to find all the image and mask pairs, and another 5 basic information: dataset name, modality, label name, patient ids (to split train-test set) and official split (if provided).
-In 'processor.py', we customize the process procedure for each dataset, to generate a jsonl file including these information for each sample. 
+For each dataset, we need to find all the image and mask pairs, and another 5 basic information: dataset name, modality, label name, patient ids (to split train-test set) and official split (if provided). \
+In `processor.py`, we customize the process procedure for each dataset, to generate a jsonl file including these information for each sample. \
 Take ACDC for instance, you need to run the following command:
 ```
 python processor.py --dataset_name ACDC --root_path 'SAT-DS/datasets/ACDC/database' --jsonl_dir 'SAT-DS/jsonl_files'
 ```
-'root_path' should be where you download and place the data, 'jsonl_dir' should be where you plan to place the jsonl files.
+`root_path` should be where you download and place the data, `jsonl_dir` should be where you plan to place the jsonl files. \
 Note that in this step, we may convert the image and mask into new nifiti files for some datasets, such as TotalSegmentator and so on. So it may take some time.
 
 # Step 3: Load data with uniform format
-With the generated jsonl file, a dataset is ready to be used.
-However, when mixing all the datasets to train a universal segmentation model, we need to apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary.
-We realize this by customizing the load script for each dataset in 'loader.py'. For each sample, the loader will output:
-'img': tensor with shape '1, H, W, D';
-'mask': binary tensor with shape 'N, H, W, D', 'N' corresponds to the number of classes;
-'labels': a list of 'N' class name, corresponds to each channel of 'mask';
-'modality': MRI, CT or PET.
-We offer the shortcut to visualize and check any sample in any dataset, for example, to visualize the first sample in ACDC, just run the following command:
-"""
+With the generated jsonl file, a dataset is ready to be used. \
+However, when mixing all the datasets to train a universal segmentation model, we need to apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary. \
+We realize this by customizing the load script for each dataset in `loader.py`. For each sample, the loader will output:
+`img`: tensor with shape `1, H, W, D`; \
+`mask`: binary tensor with shape `N, H, W, D`, `N` corresponds to the number of classes; \
+`labels`: a list of `N` class name, corresponds to each channel of `mask`; \
+`modality`: MRI, CT or PET. \
+We also offer the shortcut to visualize and check any sample in any dataset, for example, to visualize the first sample in ACDC, just run the following command:
+```
 python loader.py --visualization_dir 'SAT-DS/visualization' --path2jsonl 'SAT-DS/jsonl_files/ACDC.jsonl' --i 0
-"""
+```
+
+# (Optional) Step 4: Split train and test set
+We offer the train-test split used in our paper for each dataset in json files. To follow our split and benchmark your method, simply run this command:
+```
+python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/ACDC.jsonl' --train_jsonl 'SAT-DS/trainsets/ACDC.jsonl' --test_jsonl 'SAT-DS/testsets/ACDC.jsonl' --split_json 'split_json/ACDC'
+```
+This will split the jsonl file into train and test.
