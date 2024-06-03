@@ -1,6 +1,10 @@
 # SAT-DS
 
-This is the official repository to prepare the 72 segmentation datasets involved in "One Model to Rule them All: Towards Universal Segmentation for Medical Images with Text Prompts".
+This is the official repository to build **SAT-DS**, a medical data collection of **72** public segmentation datasets, contains over **22K** 3D images, **302K** segmentation masks and **497** classes from **3** different modalities (MRI, CT, PET) and **8** human body regions.
+
+This repo can be used to prepare and unfied all these datasets to train SAT, or any 3D universal medical segmentation model driven by text prompts.
+
+Check our paper "One Model to Rule them All: Towards Universal Segmentation for Medical Images with Text Prompts" for more details.
 
 [ArXiv](https://arxiv.org/abs/2312.17183)
 
@@ -98,7 +102,7 @@ Note that in this step, we may convert the image and mask into new nifiti files 
 # Step 3: Load data with uniform format
 With the generated jsonl file, a dataset is ready to be used. \
 However, when mixing all the datasets to train a universal segmentation model, we need to apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary. \
-We realize this by customizing the load script for each dataset in `loader.py`. For each sample, the loader will output:
+We realize this by customizing the load script for each dataset in `loader.py`. For each sample, the loader will output: \
 `img`: tensor with shape `1, H, W, D`; \
 `mask`: binary tensor with shape `N, H, W, D`, `N` corresponds to the number of classes; \
 `labels`: a list of `N` class name, corresponds to each channel of `mask`; \
