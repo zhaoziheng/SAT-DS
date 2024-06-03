@@ -6,6 +6,8 @@ This is the official repository to prepare the 72 segmentation datasets involved
 
 [Website](https://zhaoziheng.github.io/SAT/)
 
+![Example Figure](figures/wholebody_demonstration.png)
+
 # Step 1: Download datasets
 This is the detailed list of all the datasets and their download links.
 | Dataset | Download link |
