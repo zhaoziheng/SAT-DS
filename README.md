@@ -89,32 +89,64 @@ This is the detailed list of all the datasets and their download links.
 | WMH | https://wmh.isi.uu.nl/ |
 | WORD | https://github.com/HiLab-git/WORD} |
 
-# Step 2: Preprocess datasets with uniform format
+# Step 2: Preprocess datasets
 For each dataset, we need to find all the image and mask pairs, and another 5 basic information: dataset name, modality, label name, patient ids (to split train-test set) and official split (if provided). \
 In `processor.py`, we customize the process procedure for each dataset, to generate a jsonl file including these information for each sample. \
-Take ACDC for instance, you need to run the following command:
+Take AbdomenCT1K for instance, you need to run the following command:
 ```
-python processor.py --dataset_name ACDC --root_path 'SAT-DS/datasets/ACDC/database' --jsonl_dir 'SAT-DS/jsonl_files'
+python processor.py --dataset_name AbdomenCT1K --root_path 'SAT-DS/datasets/AbdomenCT-1K' --jsonl_dir 'SAT-DS/jsonl_files'
 ```
 `root_path` should be where you download and place the data, `jsonl_dir` should be where you plan to place the jsonl files. \
+Each sample in jsonl files would be like:
+```
+{
+  'image' :"SAT-DS/datasets/AbdomenCT-1K/Images/Case_00558_0000.nii.gz",
+  'mask': "SAT-DS/datasets/AbdomenCT-1K/Masks/Case_00558.nii.gz",
+  'label': ["liver", "kidney", "spleen", "pancreas"],
+  'modality': 'CT',
+  'dataset': 'AbdomenCT1K,
+  'official_split': 'unknown',
+  'patient_id': 'Case_00558_0000.nii.gz',
+}
+```
 Note that in this step, we may convert the image and mask into new nifiti files for some datasets, such as TotalSegmentator and so on. So it may take some time.
 
-# Step 3: Load data with uniform format
-With the generated jsonl file, a dataset is ready to be used. \
+# Step 3: Load data with unified normalization
+With the generated jsonl file, a dataset is now ready to be used. \
 However, when mixing all the datasets to train a universal segmentation model, we need to apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary. \
-We realize this by customizing the load script for each dataset in `loader.py`. For each sample, the loader will output: \
-`img`: tensor with shape `1, H, W, D`; \
-`mask`: binary tensor with shape `N, H, W, D`, `N` corresponds to the number of classes; \
-`labels`: a list of `N` class name, corresponds to each channel of `mask`; \
-`modality`: MRI, CT or PET. \
-We also offer the shortcut to visualize and check any sample in any dataset, for example, to visualize the first sample in ACDC, just run the following command:
+We realize this by customizing the load script for each dataset in `loader.py`, this is a simple demo how to use it:
 ```
-python loader.py --visualization_dir 'SAT-DS/visualization' --path2jsonl 'SAT-DS/jsonl_files/ACDC.jsonl' --i 0
+from loader import Loader_Wrapper
+
+loader = Loader_Wrapper()
+    
+# load samples from jsonl
+with open('SAT-DS/jsonl_files', 'r') as f:
+    lines = f.readlines()
+    data = [json.loads(line) for line in lines]
+
+# load a sample
+for sample in data:
+    batch = getattr(loader, func_name)(sample)
+    img_tensor, mc_mask, text_ls, modality, image_path, mask_path = batch
+```
+For each sample, the loader will output:
+```
+img_tensor  # tensor with shape (1, H, W, D)
+mc_mask  # binary tensor with shape (N, H, W, D), one channel for each class;
+text_ls  # a list of N class name;
+modality  # MRI, CT or PET;
+image_path  # path to mask file;
+mask_path  # path to imag file;
+```
+We also offer the shortcut to visualize and check any sample in any dataset after normalization. For example, to visualize the first sample in AbdomenCT1K, just run the following command:
+```
+python loader.py --visualization_dir 'SAT-DS/visualization' --path2jsonl 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --i 0
 ```
 
 # (Optional) Step 4: Split train and test set
 We offer the train-test split used in our paper for each dataset in json files. To follow our split and benchmark your method, simply run this command:
 ```
-python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/ACDC.jsonl' --train_jsonl 'SAT-DS/trainsets/ACDC.jsonl' --test_jsonl 'SAT-DS/testsets/ACDC.jsonl' --split_json 'split_json/ACDC'
+python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --train_jsonl 'SAT-DS/trainsets/AbdomenCT1K.jsonl' --test_jsonl 'SAT-DS/testsets/AbdomenCT1K.jsonl' --split_json 'split_json/AbdomenCT1K'
 ```
 This will split the jsonl file into train and test.
