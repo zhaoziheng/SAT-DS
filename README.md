@@ -114,7 +114,7 @@ Note that in this step, we may convert the image and mask into new nifiti files 
 
 # Step 3: Load data with unified normalization
 With the generated jsonl file, a dataset is now ready to be used. \
-However, when mixing all the datasets to train a universal segmentation model, we need to apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary. \
+However, when mixing all the datasets to train a universal segmentation model, we need to **apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary.** \
 We realize this by customizing the load script for each dataset in `loader.py`, this is a simple demo how to use it:
 ```
 from loader import Loader_Wrapper
