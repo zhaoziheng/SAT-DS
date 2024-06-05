@@ -151,3 +151,14 @@ We offer the train-test split used in our paper for each dataset in json files. 
 python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --train_jsonl 'SAT-DS/trainsets/AbdomenCT1K.jsonl' --test_jsonl 'SAT-DS/testsets/AbdomenCT1K.jsonl' --split_json 'split_json/AbdomenCT1K'
 ```
 This will split the jsonl file into train and test.
+
+## Citation
+If you use this code for your research or project, please cite:
+```
+@arxiv{zhao2023model,
+  title={One Model to Rule them All: Towards Universal Segmentation for Medical Images with Text Prompt}, 
+  author={Ziheng Zhao and Yao Zhang and Chaoyi Wu and Xiaoman Zhang and Ya Zhang and Yanfeng Wang and Weidi Xie},
+  year={2023},
+  journal={arXiv preprint arXiv:2312.17183},
+}
+```
