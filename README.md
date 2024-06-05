@@ -152,7 +152,7 @@ python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' 
 ```
 This will split the jsonl file into train and test.
 
-## Citation
+# Citation
 If you use this code for your research or project, please cite:
 ```
 @arxiv{zhao2023model,
