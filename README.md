@@ -115,7 +115,7 @@ Note that in this step, we may convert the image and mask into new nifiti files 
 # Step 3: Load data with unified normalization
 With the generated jsonl file, a dataset is now ready to be used. \
 However, when mixing all the datasets to train a universal segmentation model, we need to **apply normalization on the image intensity, orientation, spacing across all the datasets, and adjust labels if necessary.** \
-We realize this by customizing the load script for each dataset in `loader.py`, this is a simple demo how to use it:
+We realize this by customizing the load script for each dataset in `loader.py`, this is a simple demo how to use it in your code:
 ```
 from loader import Loader_Wrapper
 
@@ -131,7 +131,7 @@ for sample in data:
     batch = getattr(loader, func_name)(sample)
     img_tensor, mc_mask, text_ls, modality, image_path, mask_path = batch
 ```
-For each sample, the loader will output:
+For each sample, the loader will normalized output:
 ```
 img_tensor  # tensor with shape (1, H, W, D)
 mc_mask  # binary tensor with shape (N, H, W, D), one channel for each class;
@@ -145,12 +145,22 @@ We also offer the shortcut to visualize and check any sample in any dataset afte
 python loader.py --visualization_dir 'SAT-DS/visualization' --path2jsonl 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --i 0
 ```
 
-# (Optional) Step 4: Split train and test set
+# (Optional) Step 4: Convert to npy files
+For convenience, before training SAT, we normalize all the data according to step 3, and convert the images and segmentation masks to npy files. If you try to use our training code, run this command for each dataset:
+```
+python convert_to_npy.py --jsonl2load 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --jsonl2save 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl'
+```
+The converted npy files will be saved in `preprocessed_npy/dataset_name`, and some new information will be added to the jsonl file for connivence to load the npy files.
+
+# (Optional) Step 5: Split train and test set
 We offer the train-test split used in our paper for each dataset in json files. To follow our split and benchmark your method, simply run this command:
 ```
 python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --train_jsonl 'SAT-DS/trainsets/AbdomenCT1K.jsonl' --test_jsonl 'SAT-DS/testsets/AbdomenCT1K.jsonl' --split_json 'split_json/AbdomenCT1K'
 ```
-This will split the jsonl file into train and test.
+This will split the jsonl file into train and test. Or you can diy and use your split json file.
+
+# (Optional) Step 6: DIY your data collection
+You may want to customize the dataset collection in training your model, simply merge the train jsonls of the data you want in one, for example, merged.jsonl. And now you are ready to use our training code in this [repo](https://github.com/zhaoziheng/SAT).
 
 # Citation
 If you use this code for your research or project, please cite:
