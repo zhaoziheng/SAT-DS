@@ -2,6 +2,9 @@
 
 This is the official repository to build **SAT-DS**, a medical data collection of **72** public segmentation datasets, contains over **22K** 3D images, **302K** segmentation masks and **497** classes from **3** different modalities (MRI, CT, PET) and **8** human body regions. 🚀
 
+### News
+🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow reattribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) and [baiduyun](https://pan.baidu.com/s/1hg5RFuU2aEUveP2yP5XlOA?pwd=dpe3). **All these datasets are preprocessed and packaged by us for your convenience, ready for immediate use upon download and extraction.** Download the datasets you need and unzip them in `data/nii`, these datasets can be used immediately with the paired jsonl files in `data/jsonl`, check Step 3 below for how to use them. Note that we respect and adhere to the licenses of all the datasets, if we incorrectly reattribute any of them, please contact us.
+
 ### What we have done in building SAT-DS:
   - Collect as many public datasets as possible for 3D medical segmentation, and compile their basic information;
   - Check and normalize image scans in each dataset, including orientation, spacing and intensity;
@@ -10,7 +13,8 @@ This is the official repository to build **SAT-DS**, a medical data collection o
 
 ### What we offer in this repo:
   - (Step 1) Access to each dataset in SAT-DS.
-  - (Step 2) Code to obtain samples in each dataset.
+  - (Step 2) Code to preprocess samples in each dataset.
+  - (**Shortcut to skip Step 1 and 2**) Access to preprocessed and packaged datasets that can be used immediately.
   - (Step 3) Code to load samples with normalized image, standardized class names from each dataset.
   - (Step 3) Code to visualize and check the samples.
   - (Step 4) Code to prepare data in SAT required format.
@@ -110,15 +114,18 @@ For each dataset, we need to find all the image and mask pairs, and another 5 ba
 In `processor.py`, we customize the process procedure for each dataset, to generate a jsonl file including these information for each sample. \
 Take AbdomenCT1K for instance, you need to run the following command:
 ```
-python processor.py --dataset_name AbdomenCT1K --root_path 'SAT-DS/datasets/AbdomenCT-1K' --jsonl_dir 'SAT-DS/jsonl_files'
+python processor.py \
+--dataset_name AbdomenCT1K \
+--root_path 'SAT-DS/data/nii/AbdomenCT-1K' \
+--jsonl_dir 'SAT-DS/data/jsonl'
 ```
 `root_path` should be where you download and place the data, `jsonl_dir` should be where you plan to place the jsonl files. \
 ⚠️ Note the `dataset_name` and the name in the table might not be exactly the same. For specific details, please refer to each process function in `processor.py`. \
 After process, each sample in jsonl files would be like:
 ```
 {
-  'image' :"SAT-DS/datasets/AbdomenCT-1K/Images/Case_00558_0000.nii.gz",
-  'mask': "SAT-DS/datasets/AbdomenCT-1K/Masks/Case_00558.nii.gz",
+  'image' :"SAT-DS/data/nii/AbdomenCT-1K/Images/Case_00558_0000.nii.gz",
+  'mask': "SAT-DS/data/nii/AbdomenCT-1K/Masks/Case_00558.nii.gz",
   'label': ["liver", "kidney", "spleen", "pancreas"],
   'modality': 'CT',
   'dataset': 'AbdomenCT1K,
@@ -127,6 +134,9 @@ After process, each sample in jsonl files would be like:
 }
 ```
 Note that in this step, we may convert the image and mask into new nifiti files for some datasets, such as TotalSegmentator and so on. So it may take some time.
+
+# Shortcut to skip Step 1 and 2: Download the preprocessed and packaged data for immediate use
+We offer shortcut download links of 42 datasets in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) and [baiduyun](https://pan.baidu.com/s/1hg5RFuU2aEUveP2yP5XlOA?pwd=dpe3). All these datasets are preprocessed and packaged in advance. Download the datasets you need and unzip them in `data/nii`, each dataset is paired with a jsonl file in `data/jsonl`.
 
 # Step 3: Load data with unified normalization
 With the generated jsonl file, a dataset is now ready to be used. \
@@ -138,7 +148,7 @@ from loader import Loader_Wrapper
 loader = Loader_Wrapper()
     
 # load samples from jsonl
-with open('SAT-DS/jsonl_files', 'r') as f:
+with open('SAT-DS/data/jsonl', 'r') as f:
     lines = f.readlines()
     data = [json.loads(line) for line in lines]
 
@@ -156,22 +166,31 @@ modality  # MRI, CT or PET;
 image_path  # path to mask file;
 mask_path  # path to imag file;
 ```
-We also offer the shortcut to visualize and check any sample in any dataset after normalization. For example, to visualize the first sample in AbdomenCT1K, just run the following command:
+We also offer the shortcut to visualize and check any sample in any dataset after normalization. For example, to visualize the first sample in AbdomenCT1K.jsonl, just run the following command:
 ```
-python loader.py --visualization_dir 'SAT-DS/visualization' --path2jsonl 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --i 0
+python loader.py \
+--visualization_dir 'SAT-DS/data/visualization' \
+--path2jsonl 'SAT-DS/data/jsonl/AbdomenCT1K.jsonl' \
+--i 0
 ```
 
 # (Optional) Step 4: Convert to npy files
 For convenience, before training SAT, we normalize all the data according to step 3, and convert the images and segmentation masks to npy files. If you try to use our training code, run this command for each dataset:
 ```
-python convert_to_npy.py --jsonl2load 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --jsonl2save 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl'
+python convert_to_npy.py \
+--jsonl2load 'SAT-DS/data/jsonl/AbdomenCT1K.jsonl' \
+--jsonl2save 'SAT-DS/data/jsonl/AbdomenCT1K.jsonl'
 ```
 The converted npy files will be saved in `preprocessed_npy/dataset_name`, and some new information will be added to the jsonl file for connivence to load the npy files.
 
 # (Optional) Step 5: Split train and test set
 We offer the train-test split used in our paper for each dataset in json files. To follow our split and benchmark your method, simply run this command:
 ```
-python train_test_split.py --jsonl2split 'SAT-DS/jsonl_files/AbdomenCT1K.jsonl' --train_jsonl 'SAT-DS/trainsets/AbdomenCT1K.jsonl' --test_jsonl 'SAT-DS/testsets/AbdomenCT1K.jsonl' --split_json 'split_json/AbdomenCT1K'
+python train_test_split.py \
+--jsonl2split 'SAT-DS/data/jsonl/AbdomenCT1K.jsonl' \
+--train_jsonl 'SAT-DS/data/trainset_jsonl/AbdomenCT1K.jsonl' \
+--test_jsonl 'SAT-DS/data/testset_jsonl/AbdomenCT1K.jsonl' \
+--split_json 'SAT-DS/data/split_json/AbdomenCT1K.json'
 ```
 This will split the jsonl file into train and test. Or you can diy and use your split json file.
 
@@ -187,4 +206,5 @@ If you use this code for your research or project, please cite:
   year={2023},
   journal={arXiv preprint arXiv:2312.17183},
 }
+And if you use any of these datasets in SAT-DS, please cite the corresponding papers.
 ```
