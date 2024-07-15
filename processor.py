@@ -1,5 +1,6 @@
 from email.mime import image
 import os
+join=os.path.join
 from turtle import left
 from PIL import Image
 import pandas as pd
@@ -41,7 +42,7 @@ class Process_Wrapper():
         for mask in mask_ls:
             image = str(mask).replace('_gt.nii.gz', '.nii.gz')
             split = 'train' if 'train' in image else 'test'
-            patent_id = image.split('/')[-1]    # patientxxx_framexx.nii.gz
+            patient_id = image.split('/')[-1]    # patientxxx_framexx.nii.gz
             data.append({
                         'image':image,
                         'mask':str(mask),
@@ -49,7 +50,7 @@ class Process_Wrapper():
                         'modality':modality,
                         'dataset':dataset,
                         'official_split':split,
-                        'patent_id':patent_id
+                        'patient_id':patient_id
                         })
             
         Path(self.jsonl_dir).mkdir(exist_ok=True, parents=True)        
