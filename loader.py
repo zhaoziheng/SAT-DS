@@ -387,7 +387,7 @@ class Loader_Wrapper():
         
         return img, mask, labels, datum['modality'], datum['image'], datum['mask']
     
-    def MSD_Liver(self, datum:dict) -> tuple:\
+    def MSD_Liver(self, datum:dict) -> tuple:
         """
         'liver', 
         'liver tumor'
