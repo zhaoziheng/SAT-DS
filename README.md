@@ -206,5 +206,5 @@ If you use this code for your research or project, please cite:
   year={2023},
   journal={arXiv preprint arXiv:2312.17183},
 }
-And if you use any of these datasets in SAT-DS, please cite the corresponding papers.
 ```
+And if you use any of these datasets in SAT-DS, please cite the corresponding papers.
