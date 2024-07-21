@@ -1,6 +1,7 @@
 # SAT-DS
 
 This is the official repository to build **SAT-DS**, a medical data collection of **72** public segmentation datasets, contains over **22K** 3D images, **302K** segmentation masks and **497** classes from **3** different modalities (MRI, CT, PET) and **8** human body regions. 🚀
+
 Based on this data collection, we build an universal segmentation model for 3D radiology scans driven by text prompts (check this [repo](https://github.com/zhaoziheng/SAT) and our [paper](https://arxiv.org/abs/2312.17183)).
 
 ### News
