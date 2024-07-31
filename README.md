@@ -37,7 +37,7 @@ Check our paper "One Model to Rule them All: Towards Universal Segmentation for 
 ![Example Figure](figures/wholebody_demonstration.png)
 
 # Step 1: Download datasets
-This is the detailed list of all the datasets and their download links.
+This is the detailed list of all the datasets and their download links. We preprocess and package some of them for your convenient use, [here](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) is the shortcut download links.
 | Dataset Name              | Modality | Region        | Classes | Scans | Download link                                                                                      |
 |---------------------------|----------|---------------|---------|-------|----------------------------------------------------------------------------------------------------|
 | AbdomenCT1K               | CT       | Abdomen       | 4       | 988   | https://github.com/JunMa11/AbdomenCT-1K                                                            |
