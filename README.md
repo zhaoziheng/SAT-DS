@@ -18,7 +18,7 @@ Based on this data collection, we build an universal segmentation model for 3D r
 ### What we offer in this repo:
   - (Step 1) Access to each dataset in SAT-DS.
   - (Step 2) Code to preprocess samples in each dataset.
-  - (**Shortcut to skip Step 1 and 2**) Access to preprocessed and packaged datasets that can be used immediately.
+  - (**Shortcut to skip Step 1 and 2**) [Access](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) to preprocessed and packaged datasets that can be used immediately.
   - (Step 3) Code to load samples with normalized image, standardized class names from each dataset.
   - (Step 3) Code to visualize and check the samples.
   - (Step 4) Code to prepare data in SAT required format.
