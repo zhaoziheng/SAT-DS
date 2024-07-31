@@ -5,7 +5,7 @@ This is the official repository to build **SAT-DS**, a medical data collection o
 Based on this data collection, we build an universal segmentation model for 3D radiology scans driven by text prompts (check this [repo](https://github.com/zhaoziheng/SAT) and our [paper](https://arxiv.org/abs/2312.17183)).
 
 ### News
-🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow reattribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). 
+🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow re-attribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). 
 
 **All these datasets are preprocessed and packaged by us for your convenience, ready for immediate use upon download and extraction.** Download the datasets you need and unzip them in `data/nii`, these datasets can be used immediately with the paired jsonl files in `data/jsonl`, check Step 3 below for how to use them. Note that we respect and adhere to the licenses of all the datasets, if we incorrectly reattribute any of them, please contact us.
 
@@ -37,7 +37,9 @@ Check our paper "One Model to Rule them All: Towards Universal Segmentation for 
 ![Example Figure](figures/wholebody_demonstration.png)
 
 # Step 1: Download datasets
-This is the detailed list of all the datasets and their download links. We preprocess and package some of them for your convenient use, [here](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) is the shortcut download links.
+This is the detailed list of all the datasets and their official download links. 
+
+As a shortcut, we preprocess, package and re-attribute some of them for your convenient use. Download them [here](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0).
 | Dataset Name              | Modality | Region        | Classes | Scans | Download link                                                                                      |
 |---------------------------|----------|---------------|---------|-------|----------------------------------------------------------------------------------------------------|
 | AbdomenCT1K               | CT       | Abdomen       | 4       | 988   | https://github.com/JunMa11/AbdomenCT-1K                                                            |
