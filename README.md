@@ -163,7 +163,7 @@ for sample in data:
     batch = getattr(loader, func_name)(sample)
     img_tensor, mc_mask, text_ls, modality, image_path, mask_path = batch
 ```
-For each sample, ** whatever the dataset it comes from**, the loader will give output in a normalized format:
+**For each sample, whatever the dataset it comes from, the loader will give output in a normalized format**:
 ```
 img_tensor  # tensor with shape (1, H, W, D)
 mc_mask  # binary tensor with shape (N, H, W, D), one channel for each class;
@@ -172,14 +172,14 @@ modality  # MRI, CT or PET;
 image_path  # path to the loaded mask file;
 mask_path  # path to the loaded imag file;
 ```
-⚠️ Note that we may merge and adjust labels here in the loader. Therefore, the output `text_ls' may be different from the `label' you see in the input jsonl file. 
-Here is an case where we merge `left kidney' and `right kidney' for a new label `kidney' when loading examples from CHAOS_MRI:
+⚠️ Note that we may merge and adjust labels here in the loader. Therefore, the output `text_ls` may be different from the `label` you see in the input jsonl file. 
+Here is an case where we merge `left kidney' and `right kidney` for a new label `kidney` when loading examples from CHAOS_MRI:
 ```
 kidney = mask[1] + mask[2]
 mask = torch.cat((mask, kidney.unsqueeze(0)), dim=0)
 labels.append("kidney")
 ```
-And here is another case where we adjust the annotation of `kidney' by integrating the annotation of `kidney tumor' and `kidney cyst':
+And here is another case where we adjust the annotation of `kidney` by integrating the annotation of `kidney tumor` and `kidney cyst`:
 ```
 mc_masks[0] += mc_masks[1]
 mc_masks[0] += mc_masks[2]
