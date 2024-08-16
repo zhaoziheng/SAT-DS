@@ -4,7 +4,7 @@ This is the official repository to build **SAT-DS**, a medical data collection o
 
 Based on this data collection, we build an universal segmentation model for 3D radiology scans driven by text prompts (check this [repo](https://github.com/zhaoziheng/SAT) and our [paper](https://arxiv.org/abs/2312.17183)).
 
-### News
+### Hightlight
 🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow re-attribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). 
 
 **All these datasets are preprocessed and packaged by us for your convenience, ready for immediate use upon download and extraction.** Download the datasets you need and unzip them in `data/nii`, these datasets can be used immediately with the paired jsonl files in `data/jsonl`, check Step 3 below for how to use them. Note that we respect and adhere to the licenses of all the datasets, if we incorrectly reattribute any of them, please contact us.
@@ -21,12 +21,12 @@ Based on this data collection, we build an universal segmentation model for 3D r
   - (**Shortcut to skip Step 1 and 2**) [Access](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) to preprocessed and packaged datasets that can be used immediately.
   - (Step 3) Code to load samples with normalized image, standardized class names from each dataset.
   - (Step 3) Code to visualize and check the samples.
-  - (Step 4) Code to prepare data in SAT required format.
-  - (Step 5) Code to split the dataset into train and test.
+  - (Step 4) Code to prepare the train and evaluation data for SAT in required format.
+  - (Step 5) Code to split the dataset into train and test in consistent with SAT.
 
 ### This repo can be used to:
-  - (Follow step 1~3) Preprocess and unfied a large-scale and comprehensive 3D medical segmentation dataset, suitable to train an universal segmentation model driven by text prompts. 
-  - (Follow step 1~6) Prepare the training and test data for [SAT](https://github.com/zhaoziheng/SAT).
+  - (Follow step 1~3) Preprocess and unfied a large-scale and comprehensive 3D medical segmentation data collection, suitable to train or finetune universal segmentation models like SAM2. 
+  - (Follow step 1~6) Prepare the training and test data  in required format for [SAT](https://github.com/zhaoziheng/SAT).
 
 Check our paper "One Model to Rule them All: Towards Universal Segmentation for Medical Images with Text Prompts" for more details.
 
@@ -37,7 +37,7 @@ Check our paper "One Model to Rule them All: Towards Universal Segmentation for 
 ![Example Figure](figures/wholebody_demonstration.png)
 
 # Step 1: Download datasets
-This is the detailed list of all the datasets and their official download links. 
+This is the detailed list of all the datasets and their official download links. Their citation information can be found in `citation.bib` . 
 
 As a shortcut, we preprocess, package and re-attribute some of them for your convenient use. Download them [here](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0).
 | Dataset Name              | Modality | Region        | Classes | Scans | Download link                                                                                      |
@@ -226,4 +226,4 @@ If you use this code for your research or project, please cite:
   journal={arXiv preprint arXiv:2312.17183},
 }
 ```
-And if you use any of these datasets in SAT-DS, please cite the corresponding papers.
+And if you use any of these datasets in SAT-DS, please cite the corresponding papers. A summerized citation information can be found in `citation.bib` .
