@@ -144,7 +144,7 @@ After process, each sample in jsonl files would be like:
 Note that in this step, we may convert the image and mask into new nifiti files for some datasets, such as TotalSegmentator and so on. So it may take some time.
 
 # Shortcut to skip Step 1 and 2: Download the preprocessed and packaged data for immediate use
-We offer shortcut download links of 42 datasets in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) and [baiduyun](https://pan.baidu.com/s/1hg5RFuU2aEUveP2yP5XlOA?pwd=dpe3). All these datasets are preprocessed and packaged in advance. Download the datasets you need and unzip them in `data/nii`, each dataset is paired with a jsonl file in `data/jsonl`.
+We offer shortcut download links of 42 datasets in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). All these datasets are preprocessed and packaged in advance. Download the datasets you need and unzip them in `data/nii`, each dataset is paired with a jsonl file in `data/jsonl`.
 
 # Step 3: Load data with unified normalization
 With the generated jsonl file, a dataset is now ready to be used. \
