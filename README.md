@@ -213,10 +213,17 @@ python train_test_split.py \
 --test_jsonl 'SAT-DS/data/testset_jsonl/AbdomenCT1K.jsonl' \
 --split_json 'SAT-DS/data/split_json/AbdomenCT1K.json'
 ```
-This will split the jsonl file into train and test. Or you can diy and use your split json file.
+This will split the jsonl file into train and test. 
+
+Or, if you want to re-split them, just customize your split by identifying the `patient_id` in the json file (``patient_id`` of each sample can be found in jsonl file of each dataset):
+```
+{'train':['train_patient_id1', ...], 'test':['test_patient_id1', ...]}
+```
 
 # (Optional) Step 6: DIY your data collection
-You may want to customize the dataset collection in training your model, simply merge the train jsonls of the data you want in one, for example, merged.jsonl. And now you are ready to use our training code in this [repo](https://github.com/zhaoziheng/SAT).
+You may want to customize the dataset collection in training your model, simply merge the train jsonls of the data you want to involve. For example, merge the jsonls for all the 72 datasets into `train.jsonl`, and you can use them together to train SAT, using our training code in this [repo](https://github.com/zhaoziheng/SAT). 
+
+Similarly, you can customize a benchmark with arbitrary datasets you want by merging the test jsonls.
 
 # Citation
 If you use this code for your research or project, please cite:
