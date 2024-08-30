@@ -1,8 +1,8 @@
 # SAT-DS
 
-[![Dropbox](https://img.shields.io/badge/Dropbox-Data-blue)](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0)
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/2312.17183)
-[![Model](https://img.shields.io/badge/GitHub-SAT-blue)](https://github.com/zhaoziheng/SAT)
+[![Dropbox](https://img.shields.io/badge/Dropbox-Download%20Link-blue?logo=dropbox)](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg?logo=arxiv)](https://arxiv.org/abs/2312.17183)
+[![Model](https://img.shields.io/badge/GitHub-SAT-green?logo=github)](https://github.com/zhaoziheng/SAT)
 
 This is the official repository to build **SAT-DS**, a medical data collection of **72** public segmentation datasets, contains over **22K** 3D images, **302K** segmentation masks and **497** classes from **3** different modalities (MRI, CT, PET) and **8** human body regions. 🚀
 
