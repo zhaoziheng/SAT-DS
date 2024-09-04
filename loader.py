@@ -3508,10 +3508,14 @@ def checksample(visualization_dir, path2jsonl, sample_idx=0):
     with open(path2jsonl, 'r') as f:
         lines = f.readlines()
         data = [json.loads(line) for line in lines]
+        
+    print('check1')
     
     func_name = data[sample_idx]['dataset']
     batch = getattr(loader, func_name)(data[sample_idx])
     img_tensor, mc_mask, text_ls, modality, image_path, mask_path = batch
+    
+    print('check2')
     
     # check
     dataset_name = data[sample_idx]['dataset']
