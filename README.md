@@ -1,9 +1,19 @@
 # SAT-DS
 
+[![Dropbox](https://img.shields.io/badge/Dropbox-Download%20Link-blue?logo=dropbox)](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg?logo=arxiv)](https://arxiv.org/abs/2312.17183)
+[![Model](https://img.shields.io/badge/GitHub-SAT-green?logo=github)](https://github.com/zhaoziheng/SAT)
+
 This is the official repository to build **SAT-DS**, a medical data collection of **72** public segmentation datasets, contains over **22K** 3D images, **302K** segmentation masks and **497** classes from **3** different modalities (MRI, CT, PET) and **8** human body regions. 🚀
 
-### News
-🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow reattribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) and [baiduyun](https://pan.baidu.com/s/1hg5RFuU2aEUveP2yP5XlOA?pwd=dpe3). **All these datasets are preprocessed and packaged by us for your convenience, ready for immediate use upon download and extraction.** Download the datasets you need and unzip them in `data/nii`, these datasets can be used immediately with the paired jsonl files in `data/jsonl`, check Step 3 below for how to use them. Note that we respect and adhere to the licenses of all the datasets, if we incorrectly reattribute any of them, please contact us.
+Based on this data collection, we build an universal segmentation model for 3D radiology scans driven by text prompts (check this [repo](https://github.com/zhaoziheng/SAT) and our [paper](https://arxiv.org/abs/2312.17183)).
+
+The data collection will continuously growing, stay tuned!
+
+### Hightlight
+🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow re-attribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). 
+
+**All these datasets are preprocessed and packaged by us for your convenience, ready for immediate use upon download and extraction.** Download the datasets you need and unzip them in `data/nii`, these datasets can be used immediately with the paired jsonl files in `data/jsonl`, check Step 3 below for how to use them. Note that we respect and adhere to the licenses of all the datasets, if we incorrectly reattribute any of them, please contact us.
 
 ### What we have done in building SAT-DS:
   - Collect as many public datasets as possible for 3D medical segmentation, and compile their basic information;
@@ -14,15 +24,15 @@ This is the official repository to build **SAT-DS**, a medical data collection o
 ### What we offer in this repo:
   - (Step 1) Access to each dataset in SAT-DS.
   - (Step 2) Code to preprocess samples in each dataset.
-  - (**Shortcut to skip Step 1 and 2**) Access to preprocessed and packaged datasets that can be used immediately.
+  - (**Shortcut to skip Step 1 and 2**) [Access](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) to preprocessed and packaged datasets that can be used immediately.
   - (Step 3) Code to load samples with normalized image, standardized class names from each dataset.
   - (Step 3) Code to visualize and check the samples.
-  - (Step 4) Code to prepare data in SAT required format.
-  - (Step 5) Code to split the dataset into train and test.
+  - (Step 4) Code to prepare the train and evaluation data for SAT in required format.
+  - (Step 5) Code to split the dataset into train and test in consistent with SAT.
 
 ### This repo can be used to:
-  - (Follow step 1~3) Preprocess and unfied a large-scale and comprehensive 3D medical segmentation dataset, suitable to train an universal segmentation model driven by text prompts. 
-  - (Follow step 1~6) Prepare the training and test data for [SAT](https://github.com/zhaoziheng/SAT).
+  - (Follow step 1~3) Preprocess and unfied a large-scale and comprehensive 3D medical segmentation data collection, suitable to train or finetune universal segmentation models like SAM2. 
+  - (Follow step 1~6) Prepare the training and test data  in required format for [SAT](https://github.com/zhaoziheng/SAT).
 
 Check our paper "One Model to Rule them All: Towards Universal Segmentation for Medical Images with Text Prompts" for more details.
 
@@ -33,7 +43,9 @@ Check our paper "One Model to Rule them All: Towards Universal Segmentation for 
 ![Example Figure](figures/wholebody_demonstration.png)
 
 # Step 1: Download datasets
-This is the detailed list of all the datasets and their download links.
+This is the detailed list of all the datasets and their official download links. Their citation information can be found in `citation.bib` . 
+
+As a shortcut, we preprocess, package and re-attribute some of them for your convenient use. Download them [here](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0).
 | Dataset Name              | Modality | Region        | Classes | Scans | Download link                                                                                      |
 |---------------------------|----------|---------------|---------|-------|----------------------------------------------------------------------------------------------------|
 | AbdomenCT1K               | CT       | Abdomen       | 4       | 988   | https://github.com/JunMa11/AbdomenCT-1K                                                            |
@@ -136,7 +148,7 @@ After process, each sample in jsonl files would be like:
 Note that in this step, we may convert the image and mask into new nifiti files for some datasets, such as TotalSegmentator and so on. So it may take some time.
 
 # Shortcut to skip Step 1 and 2: Download the preprocessed and packaged data for immediate use
-We offer shortcut download links of 42 datasets in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0) and [baiduyun](https://pan.baidu.com/s/1hg5RFuU2aEUveP2yP5XlOA?pwd=dpe3). All these datasets are preprocessed and packaged in advance. Download the datasets you need and unzip them in `data/nii`, each dataset is paired with a jsonl file in `data/jsonl`.
+We offer shortcut download links of 42 datasets in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). All these datasets are preprocessed and packaged in advance. Download the datasets you need and unzip them in `data/nii`, each dataset is paired with a jsonl file in `data/jsonl`.
 
 # Step 3: Load data with unified normalization
 With the generated jsonl file, a dataset is now ready to be used. \
@@ -157,15 +169,28 @@ for sample in data:
     batch = getattr(loader, func_name)(sample)
     img_tensor, mc_mask, text_ls, modality, image_path, mask_path = batch
 ```
-For each sample, the loader will normalized output:
+**For each sample, whatever the dataset it comes from, the loader will give output in a normalized format**:
 ```
 img_tensor  # tensor with shape (1, H, W, D)
 mc_mask  # binary tensor with shape (N, H, W, D), one channel for each class;
 text_ls  # a list of N class name;
 modality  # MRI, CT or PET;
-image_path  # path to mask file;
-mask_path  # path to imag file;
+image_path  # path to the loaded mask file;
+mask_path  # path to the loaded imag file;
 ```
+⚠️ Note that we may merge and adjust labels here in the loader. Therefore, the output `text_ls` may be different from the `label` you see in the input jsonl file. 
+Here is an case where we merge `left kidney' and `right kidney` for a new label `kidney` when loading examples from CHAOS_MRI:
+```
+kidney = mask[1] + mask[2]
+mask = torch.cat((mask, kidney.unsqueeze(0)), dim=0)
+labels.append("kidney")
+```
+And here is another case where we adjust the annotation of `kidney` by integrating the annotation of `kidney tumor` and `kidney cyst`:
+```
+mc_masks[0] += mc_masks[1]
+mc_masks[0] += mc_masks[2]
+```
+
 We also offer the shortcut to visualize and check any sample in any dataset after normalization. For example, to visualize the first sample in AbdomenCT1K.jsonl, just run the following command:
 ```
 python loader.py \
@@ -192,10 +217,17 @@ python train_test_split.py \
 --test_jsonl 'SAT-DS/data/testset_jsonl/AbdomenCT1K.jsonl' \
 --split_json 'SAT-DS/data/split_json/AbdomenCT1K.json'
 ```
-This will split the jsonl file into train and test. Or you can diy and use your split json file.
+This will split the jsonl file into train and test. 
+
+Or, if you want to re-split them, just customize your split by identifying the `patient_id` in the json file (``patient_id`` of each sample can be found in jsonl file of each dataset):
+```
+{'train':['train_patient_id1', ...], 'test':['test_patient_id1', ...]}
+```
 
 # (Optional) Step 6: DIY your data collection
-You may want to customize the dataset collection in training your model, simply merge the train jsonls of the data you want in one, for example, merged.jsonl. And now you are ready to use our training code in this [repo](https://github.com/zhaoziheng/SAT).
+You may want to customize the dataset collection in training your model, simply merge the train jsonls of the data you want to involve. For example, merge the jsonls for all the 72 datasets into `train.jsonl`, and you can use them together to train SAT, using our training code in this [repo](https://github.com/zhaoziheng/SAT). 
+
+Similarly, you can customize a benchmark with arbitrary datasets you want by merging the test jsonls.
 
 # Citation
 If you use this code for your research or project, please cite:
@@ -206,5 +238,5 @@ If you use this code for your research or project, please cite:
   year={2023},
   journal={arXiv preprint arXiv:2312.17183},
 }
-And if you use any of these datasets in SAT-DS, please cite the corresponding papers.
 ```
+And if you use any of these datasets in SAT-DS, please cite the corresponding papers. A summerized citation information can be found in `citation.bib` .
