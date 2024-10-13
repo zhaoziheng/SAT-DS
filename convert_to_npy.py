@@ -94,7 +94,7 @@ def convert_to_npy(jsonl2load, jsonl2save, process_image=True, process_mask=True
     parent_directory = os.path.dirname(jsonl2save)
     os.makedirs(parent_directory, exist_ok=True)
     with open(jsonl2save, 'w') as f:    
-        for datum in filtered_data:
+        for datum in data:
             f.write(json.dumps(datum)+'\n')
  
 if __name__ == '__main__':
@@ -121,11 +121,9 @@ if __name__ == '__main__':
     
     loader = Loader_Wrapper()
     
-    crop_size = [288, 288, 96]
     # when generate new labels, only update masks (make sure data_loader_renorm robust to additional labels)
     convert_to_npy(config.jsonl2load,
                    config.jsonl2save,
-                   crop_size,
                    config.image,
                    config.mask,
                    config.overwrite)    
