@@ -1,0 +1,38 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "left_rib_1": 1,
+        "left_rib_10": 2,
+        "left_rib_11": 3,
+        "left_rib_12": 4,
+        "left_rib_2": 5,
+        "left_rib_3": 6,
+        "left_rib_4": 7,
+        "left_rib_5": 8,
+        "left_rib_6": 9,
+        "left_rib_7": 10,
+        "left_rib_8": 11,
+        "left_rib_9": 12,
+        "right_rib_1": 13,
+        "right_rib_10": 14,
+        "right_rib_11": 15,
+        "right_rib_12": 16,
+        "right_rib_2": 17,
+        "right_rib_3": 18,
+        "right_rib_4": 19,
+        "right_rib_5": 20,
+        "right_rib_6": 21,
+        "right_rib_7": 22,
+        "right_rib_8": 23,
+        "right_rib_9": 24
+    },
+    "numTraining": 962,
+    "file_ending": ".nii.gz",
+    "name": "TotalSegmentatorRibs",
+    "reference": "none",
+    "description": "TotalSegmentatorRibs",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "spleen": 1
+    },
+    "numTraining": 33,
+    "file_ending": ".nii.gz",
+    "name": "MSDSpleen",
+    "reference": "none",
+    "description": "MSDSpleen",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

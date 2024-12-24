@@ -1,0 +1,33 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "sacrum": 1,
+        "L5": 2,
+        "L4": 3,
+        "L3": 4,
+        "L2": 5,
+        "L1": 6,
+        "T12": 7,
+        "T11": 8,
+        "T10": 9,
+        "T9": 10,
+        "disc L5 sacrum": 11,
+        "disc L4 L5": 12,
+        "disc L3 L4": 13,
+        "disc L2 L3": 14,
+        "disc L1 L2": 15,
+        "disc T12 L1": 16,
+        "disc T11 T12": 17,
+        "disc T10 T11": 18,
+        "disc T9 T10": 19
+    },
+    "numTraining": 73,
+    "file_ending": ".nii.gz",
+    "name": "MRSpineSeg",
+    "reference": "none",
+    "description": "MRSpineSeg",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

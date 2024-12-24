@@ -1,0 +1,35 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "left_autochthon": 1,
+        "right_autochthon": 2,
+        "brain": 3,
+        "left_clavicula": 4,
+        "right_clavicula": 5,
+        "left_femur": 6,
+        "right_femur": 7,
+        "left_gluteus_maximus": 8,
+        "right_gluteus_maximus": 9,
+        "left_gluteus_medius": 10,
+        "right_gluteus_medius": 11,
+        "left_gluteus_minimus": 12,
+        "right_gluteus_minimus": 13,
+        "left_hip": 14,
+        "right_hip": 15,
+        "left_humerus": 16,
+        "right_humerus": 17,
+        "left_iliopsoas": 18,
+        "right_iliopsoas": 19,
+        "left_scapula": 20,
+        "right_scapula": 21
+    },
+    "numTraining": 962,
+    "file_ending": ".nii.gz",
+    "name": "TotalSegmentatorMuscles",
+    "reference": "none",
+    "description": "TotalSegmentatorMuscles",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

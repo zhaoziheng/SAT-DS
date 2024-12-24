@@ -1,0 +1,16 @@
+{
+    "channel_names": {
+        "0": "PET"
+    },
+    "labels": {
+        "background": 0,
+        "head and neck tumor": 1,
+        "lymph node": 2
+    },
+    "numTraining": 419,
+    "file_ending": ".nii.gz",
+    "name": "Hecktor2022",
+    "reference": "none",
+    "description": "Hecktor2022",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

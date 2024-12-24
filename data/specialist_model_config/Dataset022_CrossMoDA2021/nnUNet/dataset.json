@@ -1,0 +1,16 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "vestibular schwannoma": 1,
+        "cochlea": 2
+    },
+    "numTraining": 84,
+    "file_ending": ".nii.gz",
+    "name": "CrossMoDA2021",
+    "reference": "none",
+    "description": "CrossMoDA2021",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

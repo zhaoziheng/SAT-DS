@@ -1,0 +1,19 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "right heart ventricle": 1,
+        "myocardial scar": 2,
+        "myocardial edema": 3,
+        "myocardium": 4,
+        "left heart ventricle": 5
+    },
+    "numTraining": 60,
+    "file_ending": ".nii.gz",
+    "name": "MyoPS2020",
+    "reference": "none",
+    "description": "MyoPS2020",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "left heart atrium": 1
+    },
+    "numTraining": 104,
+    "file_ending": ".nii.gz",
+    "name": "LAScarQS22Task2",
+    "reference": "none",
+    "description": "LAScarQS22Task2",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

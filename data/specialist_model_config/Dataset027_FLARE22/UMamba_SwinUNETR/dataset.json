@@ -1,0 +1,27 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "liver": 1,
+        "right kidney": 2,
+        "spleen": 3,
+        "pancreas": 4,
+        "aorta": 5,
+        "inferior vena cava": 6,
+        "right adrenal gland": 7,
+        "left adrenal gland": 8,
+        "gallbladder": 9,
+        "esophagus": 10,
+        "stomach": 11,
+        "duodenum": 12,
+        "left kidney": 13
+    },
+    "numTraining": 40,
+    "file_ending": ".nii.gz",
+    "name": "FLARE22",
+    "reference": "none",
+    "description": "FLARE22",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

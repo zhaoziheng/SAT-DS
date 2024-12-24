@@ -1,0 +1,21 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "myocardium": 1,
+        "left heart atrium": 2,
+        "left heart ventricle": 3,
+        "right heart atrium": 4,
+        "right heart ventricle": 5,
+        "heart ascending aorta": 6,
+        "pulmonary artery": 7
+    },
+    "numTraining": 16,
+    "file_ending": ".nii.gz",
+    "name": "MMWHSMR",
+    "reference": "none",
+    "description": "MMWHSMR",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

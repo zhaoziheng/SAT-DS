@@ -1,0 +1,16 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "liver": 1,
+        "liver tumor": 2
+    },
+    "numTraining": 48,
+    "file_ending": ".nii.gz",
+    "name": "ATLAS",
+    "reference": "none",
+    "description": "ATLAS",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

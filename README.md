@@ -8,7 +8,7 @@ This is the official repository to build **SAT-DS**, a medical data collection o
 
 Based on this data collection, we build an universal segmentation model for 3D radiology scans driven by text prompts (check this [repo](https://github.com/zhaoziheng/SAT) and our [paper](https://arxiv.org/abs/2312.17183)).
 
-The data collection will continuously growing, stay tuned!
+We have added 7 more datasets absent from SAT-DS, check the table following. The data collection will continuously growing, stay tuned!
 
 ### Hightlight
 🎉 To save your time from downloading and preprocess so many datasets, we offer shortcut download links of 42/72 datasets in SAT-DS, which allow re-attribution with licenses such as CC BY-SA. Find them in [dropbox](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0). 
@@ -32,7 +32,10 @@ The data collection will continuously growing, stay tuned!
 
 ### This repo can be used to:
   - (Follow step 1~3) Preprocess and unfied a large-scale and comprehensive 3D medical segmentation data collection, suitable to train or finetune universal segmentation models like SAM2. 
-  - (Follow step 1~6) Prepare the training and test data  in required format for [SAT](https://github.com/zhaoziheng/SAT).
+  - (Follow step 1~6) Prepare the training and test data in required format for [SAT](https://github.com/zhaoziheng/SAT).
+
+### SAT-DS for benchmarking
+We provide the detailed configurations of all the specialist models (nnU-Nets, U-Mambas, SwinUNETR) we have trained and evaluated on each of these datasets, check them [here](https://github.com/zhaoziheng/SAT-DS/blob/main/data/specialist_model_config). nnU-Nets are trained and evaluated following the [official guidance](https://github.com/MIC-DKFZ/nnUNet/tree/master/nnunetv2), while U-Mamba and SwinUNETR follows the [official implementation of U-Mamba](https://github.com/bowang-lab/U-Mamba). Their results are reported in our paper.
 
 Check our paper "One Model to Rule them All: Towards Universal Segmentation for Medical Images with Text Prompts" for more details.
 
@@ -43,7 +46,7 @@ Check our paper "One Model to Rule them All: Towards Universal Segmentation for 
 ![Example Figure](figures/wholebody_demonstration.png)
 
 # Step 1: Download datasets
-This is the detailed list of all the datasets and their official download links. Their citation information can be found in `citation.bib` . 
+This is the detailed list of all the datasets and their official download links. Dataset marked with * are absent from SAT-DS and thus we do not providing train-test split file. Citation information of each dataset can be found in `citation.bib` . 
 
 As a shortcut, we preprocess, package and re-attribute some of them for your convenient use. Download them [here](https://www.dropbox.com/scl/fo/gsr7wqh9s5wc2rfsmg08j/AJ98Hfn-FbkroCEXDEIlgkw?rlkey=ubx2nkisroks3vbkopgm3jxyz&st=60l9ybda&dl=0).
 | Dataset Name              | Modality | Region        | Classes | Scans | Download link                                                                                      |
@@ -120,6 +123,13 @@ As a shortcut, we preprocess, package and re-attribute some of them for your con
 | VerSe                     | CT       | Whole Body    | 29      | 96    | https://github.com/anjany/verse                                                                    |
 | WMH                       | MRI      | Brain         | 1       | 170   | https://wmh.isi.uu.nl/                                                                             |
 | WORD                      | CT       | Abdomen       | 18      | 150   | https://github.com/HiLab-git/WORD                                                                  |
+| AbdomenAtlas *            | CT       | Abdomen       | 29      | 9262  | https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas1.0Mini                                   |
+| LiQA *                    | MRI      | Abdomen       | 1       | 30    | https://www.zmic.org.cn/care_2024/track3/                                                          |
+| Adrenal ACC Ki67 *        | CT       | Abdomen       | 1       | 29    | https://www.cancerimagingarchive.net/collection/adrenal-acc-ki67-seg/                              |
+| ATM22 *                   | CT       | Thorax        | 1       | 279   | https://paperswithcode.com/dataset/atm22                                                           |
+| RibFrac *                 | CT       | Thorax        | 1       | 500   | https://ribfrac.grand-challenge.org/                                                               |
+| LIDC-IDRI *               | CT       | Thorax        | 1       | 2236  | https://www.cancerimagingarchive.net/collection/lidc-idri/                                         |
+| LNQ2023 *                 | CT       | Thorax        | 1       | 393   | https://lnq2023.grand-challenge.org/                                                               |
 
 # Step 2: Preprocess datasets
 For each dataset, we need to find all the image and mask pairs, and another 5 basic information: dataset name, modality, label name, patient ids (to split train-test set) and official split (if provided). \

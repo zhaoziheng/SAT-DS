@@ -1,0 +1,27 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "spleen": 1,
+        "right kidney": 2,
+        "left kidney": 3,
+        "gallbladder": 4,
+        "esophagus": 5,
+        "liver": 6,
+        "stomach": 7,
+        "aorta": 8,
+        "inferior vena cava": 9,
+        "portal vein and splenic vein": 10,
+        "pancreas": 11,
+        "right adrenal gland": 12,
+        "left adrenal gland": 13
+    },
+    "numTraining": 24,
+    "file_ending": ".nii.gz",
+    "name": "BTCV",
+    "reference": "none",
+    "description": "BTCV",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

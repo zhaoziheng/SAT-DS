@@ -1,0 +1,34 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "left auricle of heart": 1,
+        "brachiocephalic trunk": 2,
+        "left brachiocephalic vein": 3,
+        "right brachiocephalic vein": 4,
+        "left common carotid artery": 5,
+        "right common carotid artery": 6,
+        "costal cartilage": 7,
+        "heart": 8,
+        "left kidney cyst": 9,
+        "right kidney cyst": 10,
+        "prostate": 11,
+        "pulmonary vein": 12,
+        "skull": 13,
+        "spinal cord": 14,
+        "sternum": 15,
+        "left subclavian artery": 16,
+        "right subclavian artery": 17,
+        "superior vena cava": 18,
+        "thyroid gland": 19,
+        "sacral vertebrae 1 (S1)": 20
+    },
+    "numTraining": 962,
+    "file_ending": ".nii.gz",
+    "name": "TotalSegmentatorv2",
+    "reference": "none",
+    "description": "TotalSegmentatorv2",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

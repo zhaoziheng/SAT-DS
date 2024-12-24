@@ -3480,6 +3480,259 @@ class Loader_Wrapper():
         img = Normalization(img, 'CT')
 
         return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+    
+    def AbdomenAtlas(self, datum:dict) -> tuple:
+        """
+        labels = [
+            'aorta',    0
+            'gallbladder',
+            'left kidney',  2
+            'right kidney',
+            'liver',
+            'pancreas',
+            'postcava',
+            'spleen',
+            'stomach',
+            'left adrenal gland',   9
+            'right adrenal gland',
+            'urinary bladder',
+            'celiac trunk',
+            'colon',
+            'duodenum',
+            'esophagus',
+            'left femur',   16
+            'right femur',
+            'liver vessel',
+            'intestine',
+            'left lung',    20
+            'right lung',
+            'portal vein and splenic vein',
+            'prostate',
+            'rectum'
+        ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.AddChanneld(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        mc_masks = []
+        labels = datum['label'][:25]
+        for i, label in enumerate(labels):
+            binary_mask = torch.where(mask==(i+1), 1.0, 0.0)    # 0 is background, so plus one is the correct label
+            mc_masks.append(binary_mask)
+        
+        # new
+        adrenal_gland_mask = mc_masks[9] + mc_masks[10]
+        mc_masks.append(adrenal_gland_mask)
+        labels.append('adrenal gland')
+        
+        femur_mask = mc_masks[16] + mc_masks[17]
+        mc_masks.append(femur_mask)
+        labels.append('femur')
+        
+        kidney_mask = mc_masks[2]+mc_masks[3]
+        mc_masks.append(kidney_mask)
+        labels.append('kidney')
+        
+        lung_mask = mc_masks[20] + mc_masks[21]
+        mc_masks.append(lung_mask)
+        labels.append('lung')
+        
+        # merge
+        mask = torch.concat(mc_masks, dim=0)   # [N, H, W, D]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'CT')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+
+    def LiQA(self, datum:dict) -> tuple:
+        """
+        labels = [
+            'liver',
+            ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.AddChanneld(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        labels = datum['label'][:1]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'MRI')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+    
+    def ATM22(self, datum:dict) -> tuple:
+        """
+        labels = [
+            'trachea and bronchie',
+        ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.AddChanneld(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        labels = datum['label'][:1]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'CT')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+    
+    def LIDC_IDRI(self, datum:dict) -> tuple:
+        """
+        labels = [
+            'lung nodule'
+        ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.EnsureChannelFirstd(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        labels = datum['label'][:1]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'CT')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+    
+    def LNQ2023(self, datum:dict) -> tuple:
+        """
+        labels = [
+            'lymph nodule'
+        ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.EnsureChannelFirstd(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        labels = datum['label'][:1]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'CT')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+    
+    def Adrenal_ACC_Ki67(self, datum:dict) -> tuple:
+        """
+        labels = [
+            'Adrenocortical carcinoma',
+        ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.AddChanneld(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        labels = datum['label'][:1]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'CT')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
+    
+    def RibFrac(self, datum:dict) -> tuple:
+        """
+        NOTE: the mask is not binary! But we treat all kinds of fractures equally.
+        
+        labels = [
+            'Rib fracture',
+            ]
+        """
+        monai_loader = monai.transforms.Compose(
+            [
+                monai.transforms.LoadImaged(keys=['image', 'label']),
+                monai.transforms.AddChanneld(keys=['image', 'label']),
+                monai.transforms.Orientationd(axcodes="RAS", keys=['image', 'label']),
+                monai.transforms.Spacingd(keys=["image", "label"], pixdim=(1, 1, 3), mode=("bilinear", "nearest")),
+                monai.transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
+                monai.transforms.ToTensord(keys=["image", "label"]),
+            ]
+        )
+        dictionary = monai_loader({'image':datum['image'], 'label':datum['mask']})
+        img = dictionary['image'] # [1, H, W, D]
+        mask = dictionary['label']# [1, H, W, D]
+        
+        # original
+        labels = datum['label'][:1]
+        
+        ##img = repeat(img, 'c h w d -> (c r) h w d', r=3)
+        mask = torch.where(mask>0.5, 1.0, 0.0)    # 去除mask上的噪声，强制0或1
+        img = Normalization(img, 'CT')
+
+        return img, mask, labels, datum['modality'], datum['image'], datum['mask']
 
 def Normalization(torch_image, image_type):
     # rgb_list = ['rgb', 'photograph', 'laparoscopy', 'colonoscopy', 'microscopy', 'dermoscopy', 'fundus', 'fundus image']

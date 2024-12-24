@@ -1,0 +1,20 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "liver": 1,
+        "urinary bladder": 2,
+        "lung": 3,
+        "kidney": 4,
+        "bone": 5,
+        "brain": 6
+    },
+    "numTraining": 112,
+    "file_ending": ".nii.gz",
+    "name": "CTORG",
+    "reference": "none",
+    "description": "CTORG",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

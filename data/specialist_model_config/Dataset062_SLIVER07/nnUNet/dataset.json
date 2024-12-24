@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "liver": 1
+    },
+    "numTraining": 16,
+    "file_ending": ".nii.gz",
+    "name": "SLIVER07",
+    "reference": "none",
+    "description": "SLIVER07",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

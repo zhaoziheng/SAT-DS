@@ -1,0 +1,19 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "brain": 1,
+        "left optic radiation": 2,
+        "right optic radiation": 3,
+        "left corticospinal tract": 4,
+        "right corticospinal tract": 5
+    },
+    "numTraining": 48,
+    "file_ending": ".nii.gz",
+    "name": "BrainPTM",
+    "reference": "none",
+    "description": "BrainPTM",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

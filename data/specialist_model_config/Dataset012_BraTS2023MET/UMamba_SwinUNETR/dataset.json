@@ -1,0 +1,17 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "necrotic brain tumor core": 1,
+        "brain edema": 2,
+        "enhancing brain tumor": 3
+    },
+    "numTraining": 759,
+    "file_ending": ".nii.gz",
+    "name": "BraTS2023MET",
+    "reference": "none",
+    "description": "BraTS2023MET",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

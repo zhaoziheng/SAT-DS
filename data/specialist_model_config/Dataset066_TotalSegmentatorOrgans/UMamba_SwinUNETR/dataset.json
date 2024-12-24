@@ -1,0 +1,34 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "left_adrenal_gland": 1,
+        "right_adrenal_gland": 2,
+        "colon": 3,
+        "duodenum": 4,
+        "esophagus": 5,
+        "gallbladder": 6,
+        "left_kidney": 7,
+        "right_kidney": 8,
+        "liver": 9,
+        "left_lung_lower_lobe": 10,
+        "right_lung_lower_lobe": 11,
+        "right_lung_middle_lobe": 12,
+        "left_lung_upper_lobe": 13,
+        "right_lung_upper_lobe": 14,
+        "pancreas": 15,
+        "small_bowel": 16,
+        "spleen": 17,
+        "stomach": 18,
+        "trachea": 19,
+        "urinary_bladder": 20
+    },
+    "numTraining": 962,
+    "file_ending": ".nii.gz",
+    "name": "TotalSegmentatorOrgans",
+    "reference": "none",
+    "description": "TotalSegmentatorOrgans",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

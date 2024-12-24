@@ -1,0 +1,23 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "brainstem": 1,
+        "optic chiasm": 2,
+        "mandible": 3,
+        "left optic nerve": 4,
+        "right optic nerve": 5,
+        "left parotid gland": 6,
+        "right parotid gland": 7,
+        "left submandibular gland": 8,
+        "right submandibular gland": 9
+    },
+    "numTraining": 38,
+    "file_ending": ".nii.gz",
+    "name": "PDDCA",
+    "reference": "none",
+    "description": "PDDCA",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

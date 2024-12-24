@@ -1,0 +1,18 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "esophagus": 1,
+        "heart": 2,
+        "trachea": 3,
+        "aorta": 4
+    },
+    "numTraining": 32,
+    "file_ending": ".nii.gz",
+    "name": "SegTHOR",
+    "reference": "none",
+    "description": "SegTHOR",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

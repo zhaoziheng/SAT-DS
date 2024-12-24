@@ -4160,6 +4160,334 @@ class Process_Wrapper():
             for datum in data:
                 f.write(json.dumps(datum)+'\n')
      
+    def preprocess_AbdomenAtlas(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/petrelfs/zhangyao/AbdomenAtlas1.1Mini'):
+        """
+        mask: /mnt/petrelfs/zhangyao/AbdomenAtlas1.1Mini/AbdomenAtlas1.1Mini_BDMAP_00000001_00000500/BDMAP_00000100/segmentations
+        image: /mnt/petrelfs/zhangyao/AbdomenAtlas1.1Mini/AbdomenAtlas1.1Mini_BDMAP_00000001_00000500/BDMAP_00000100/ct.nii.gz
+        
+        adrenal_gland_left.nii.gz   colon.nii.gz        gall_bladder.nii.gz    liver.nii.gz                         postcava.nii.gz
+        adrenal_gland_right.nii.gz  duodenum.nii.gz     hepatic_vessel.nii.gz  lung_left.nii.gz                     prostate.nii.gz
+        aorta.nii.gz                esophagus.nii.gz    intestine.nii.gz       lung_right.nii.gz                    rectum.nii.gz
+        bladder.nii.gz              femur_left.nii.gz   kidney_left.nii.gz     pancreas.nii.gz                      spleen.nii.gz
+        celiac_trunk.nii.gz         femur_right.nii.gz  kidney_right.nii.gz    portal_vein_and_splenic_vein.nii.gz  stomach.nii.gz
+        """
+        dataset = 'AbdomenAtlas'
+        modality = 'CT'
+        labels = [
+            'aorta',
+            'gallbladder',
+            'left kidney',
+            'right kidney',
+            'liver',
+            'pancreas',
+            'postcava',
+            'spleen',
+            'stomach',
+            'left adrenal gland',
+            'right adrenal gland',
+            'urinary bladder',
+            'celiac trunk',
+            'colon',
+            'duodenum',
+            'esophagus',
+            'left femur',
+            'right femur',
+            'liver vessel',
+            'intestine',
+            'left lung',
+            'right lung',
+            'portal vein and splenic vein',
+            'prostate',
+            'rectum'
+        ]
+        
+        data = []
+        
+        for partition_id in tqdm(os.listdir(root_path)):
+            
+            for patent_id in tqdm(os.listdir(join(root_path, partition_id))):
+                
+                image_path = join(root_path, partition_id, patent_id, 'ct.nii.gz')
+                
+                # merge mask into one
+                # merged_mask = []
+                # for i, msk_path in enumerate(mask_name):
+                #     sc_mask = nib.load(join(root_path, partition_id, patent_id, 'segmentations', msk_path))
+                #     merged_mask.append(sc_mask.get_fdata())
+                # merged_mask = np.stack(merged_mask, axis=0)   # NHWD
+                # nii_mask = nib.Nifti1Image(merged_mask, sc_mask.affine, sc_mask.header)
+                # nib.save(nii_mask, join(root_path, partition_id, patent_id, 'mc_seg.nii.gz'))
+                # print(f'save to {join(root_path, partition_id, patent_id, "mc_seg.nii.gz")}, shape {merged_mask.shape}')
+                # mask_path = join(root_path, partition_id, patent_id, 'mc_seg.nii.gz')
+                
+                mask_path = join(root_path, partition_id, patent_id, 'combined_labels.nii.gz')
+
+                data.append({
+                            'image':image_path,
+                            'mask':mask_path,
+                            'label':labels,
+                            'modality':modality,
+                            'dataset':dataset,
+                            'official_split': 'train',
+                            'patient_id':patent_id,
+                        })
+        
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')
+                
+                    
+    def preprocess_LiQA(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/hwfile/medai/zhaoziheng/SAM/SAM/LiQA'):
+        """
+        Only GED4 aligns with mask
+        
+        image path: LiQA/train/Vendor_B1/1194-B1-S4/GED4.nii.gz
+        mask path: LiQA/train/Vendor_B1/1194-B1-S4/mask_GED4.nii.gz
+        """
+        dataset = 'LiQA'
+        labels = [
+            'liver'
+        ]
+        
+        # squence_ls = ['T2', 'GED4', 'GED3', 'GED2', 'GED1', 'T1', 'DWI_800']
+        # modality_ls = ['T2', 'MRI T1Gd hepatobiliary phase', 'MRI T1Gd delay phase', 'MRI T1Gd venous phase', 'MRI T1Gd arterial phase', 'T1', 'DWI']
+        squence_ls = ['GED4']
+        modality_ls = ['MRI T1Gd hepatobiliary phase']
+        
+        data = []
+        
+        for center in ['Vendor_B1', 'Vendor_B2', 'Vendor_A']:
+            for patent_id in tqdm(os.listdir(os.path.join(root_path, 'train', center))): # 1194-B1-S4
+                for file in os.listdir(os.path.join(root_path, 'train', center, patent_id)):
+                    if 'mask' not in file:
+                        continue
+                    else:
+                        assert file == 'mask_GED4.nii.gz', os.path.join(root_path, 'train', center, patent_id, file)
+                        mask_path = join(root_path, 'train', center, patent_id, file)
+
+                        # Load mask
+                        mask = nib.load(mask_path)
+                        mask_shape = mask.get_fdata().shape
+                        
+                        # find all the images with matched shape
+                        for sequence, modality in zip(squence_ls, modality_ls):
+                            image_path = join(root_path, 'train', center, patent_id, file).replace('mask_GED4', sequence)
+                            if os.path.exists(image_path):
+                                image = nib.load(image_path)
+                                image_shape = image.get_fdata().shape
+                                if image_shape == mask_shape:
+                                    data.append({
+                                                'image':image_path,
+                                                'mask':mask_path,
+                                                'label':labels,
+                                                'modality':modality,
+                                                'dataset':dataset,
+                                                'official_split': 'train',
+                                                'patient_id':patent_id,
+                                            })
+        
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')       
+    
+    def preprocess_RibFrac(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/hwfile/medai/zhaoziheng/SAM/SAM/RibFrac'):
+        """
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/RibFrac/ribfrac-train1-image/RibFrac1-image.nii.gz
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/RibFrac/ribfrac-train1-labels/RibFrac1-label.nii.gz
+        """
+        dataset = 'RibFrac'
+        labels = [
+            'Rib fracture',
+        ]
+        modality = 'CT'
+        
+        data = []
+        for part, split in zip(['train1', 'train2', 'val'], ['train', 'train', 'validation']):
+            for image_file_name in os.listdir(join(root_path, f'ribfrac-{part}-image')):
+                # RibFrac1-image.nii.gz
+                patient_id = image_file_name.split('-')[0]
+                image_path = join(root_path, f'ribfrac-{part}-image', image_file_name)
+                mask_path = join(root_path, f'ribfrac-{part}-labels', f'{patient_id}-label.nii.gz')
+                
+                if not os.path.exists(mask_path):
+                    continue
+                
+                data.append({
+                            'image':image_path,
+                            'mask':mask_path,
+                            'label':labels,
+                            'modality':modality,
+                            'dataset':dataset,
+                            'official_split': split,
+                            'patient_id':patient_id,
+                        })
+            
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')    
+    
+    def preprocess_Adrenal_ACC_Ki67(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/hwfile/medai/zhaoziheng/SAM/SAM/Adrenal-ACC-Ki67-Seg/converted_nii'):
+        """
+        Need to transfer dcm to nii first
+        
+        Adrenal-ACC-Ki67-Seg/converted_nii/Adrenal_Ki67_Seg_001/08-22-2000-NA-CT ABDOMEN-56266/CT.nii.gz
+        Adrenal-ACC-Ki67-Seg/converted_nii/Adrenal_Ki67_Seg_001/08-22-2000-NA-CT ABDOMEN-56266/SEG.nii.gz
+        """
+        dataset = 'Adrenal_ACC_Ki67'
+        labels = [
+            'Adrenocortical carcinoma',
+        ]
+        modality = 'CT'
+        
+        data = []
+        for patient_id in os.listdir(root_path):
+            for scan in os.listdir(os.path.join(root_path, patient_id)):
+                if os.path.exists(os.path.join(root_path, patient_id, scan, 'SEG.nii.gz')) and os.path.exists(os.path.join(root_path, patient_id, scan, 'CT.nii.gz')):
+                    data.append({
+                                'image':os.path.join(root_path, patient_id, scan, 'CT.nii.gz'),
+                                'mask':os.path.join(root_path, patient_id, scan, 'SEG.nii.gz'),
+                                'label':labels,
+                                'modality':modality,
+                                'dataset':dataset,
+                                'official_split': 'unknown',
+                                'patient_id':patient_id,
+                            })
+            
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')
+    
+    def preprocess_ATM22(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/hwfile/medai/zhaoziheng/SAM/SAM/ATM22'):
+        """
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/ATM22/TrainBatch1/imagesTr/ATM_xxx_0000.nii.gz
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/ATM22/TrainBatch1/labelsTr/ATM_xxx_0000.nii.gz
+        """
+        dataset = 'ATM22'
+        labels = [
+            'trachea and bronchie',
+        ]
+        modality = 'CT'
+        
+        data = []
+        for part in ['TrainBatch1', 'TrainBatch2']:
+            for image_file_name in os.listdir(join(root_path, part, 'imagesTr')):
+                if 'ATM_164_0000' in image_file_name:   # this case has misaligned mask and image
+                    continue
+                
+                patient_id = image_file_name.replace('.nii.gz', '')
+                image_path = join(root_path, part, 'imagesTr', image_file_name)
+                
+                if not os.path.exists(join(root_path, part, 'labelsTr', image_file_name)):
+                    continue
+                
+                mask_path = join(root_path, part, 'labelsTr', image_file_name)
+                
+                data.append({
+                            'image':image_path,
+                            'mask':mask_path,
+                            'label':labels,
+                            'modality':modality,
+                            'dataset':dataset,
+                            'official_split': 'train',
+                            'patient_id':patient_id,
+                        })
+            
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')
+                
+    def preprocess_LIDC_IDRI(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/hwfile/medai/zhaoziheng/SAM/SAM/ULS23/processed_data/fully_annotated/LIDC-IDRI'):
+        """
+        Need to unzip xxx.nii.gz.zip
+        
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/ULS23/processed_data/fully_annotated/LIDC-IDRI/labels/lidcidri_752_lesion_01_sample_0.nii.gz.zip
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/ULS23/processed_data/fully_annotated/LIDC-IDRI/images/lidcidri_752_lesion_01_sample_0.nii.gz
+        """
+        import zipfile
+        
+        dataset = 'LIDC_IDRI'
+        labels = [
+            'lung nodule',
+        ]
+        modality = 'CT'
+        
+        data = []
+        
+        for case in os.listdir(os.path.join(root_path, 'images')):  # diag_pancreas_2088_lesion_01.nii.gz
+            patient_id = case.replace('.nii.gz', '')
+            
+            # find mask
+            if not os.path.exists(os.path.join(root_path, 'labels', case)):
+                if not os.path.exists(os.path.join(root_path, 'labels', case.replace('.nii.gz', '.nii'))):
+                    if os.path.exists(os.path.join(root_path, 'labels', case+'.zip')):
+                        with zipfile.ZipFile(os.path.join(root_path, 'labels', case+'.zip'), 'r') as zip_ref:
+                            zip_ref.extractall(os.path.join(root_path, 'labels'))
+
+            if os.path.exists(os.path.join(root_path, 'labels', case)):
+                mask_path = os.path.join(root_path, 'labels', case)
+            elif os.path.exists(os.path.join(root_path, 'labels', case.replace('.nii.gz', '.nii'))):
+                mask_path = os.path.join(root_path, 'labels', case.replace('.nii.gz', '.nii'))
+            else:
+                continue
+
+            data.append({
+                        'image':os.path.join(root_path, 'images', case),
+                        'mask':mask_path,
+                        'label':labels,
+                        'modality':modality,
+                        'dataset':dataset,
+                        'official_split': 'train',
+                        'patient_id':patient_id,
+                    })
+            
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')
+                
+    def preprocess_LNQ2023(self, save_path='/mnt/hwfile/medai/zhaoziheng/SAM/processed_files_v1', root_path='/mnt/hwfile/medai/zhaoziheng/SAM/SAM/LNQ2023'):
+        """
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/LNQ2023/train/lnq2023-train-0394-ct.nrrd
+        /mnt/hwfile/medai/zhaoziheng/SAM/SAM/LNQ2023/train/lnq2023-train-0394-seg.nrrd
+        """
+        
+        dataset = 'LNQ2023'
+        labels = [
+            'mediastinal lymph node',
+        ]
+        modality = 'CT'
+        
+        data = []
+        
+        for case in os.listdir(os.path.join(root_path, 'train')):  # lnq2023-train-0394-ct.nrrd
+            if case.endswith('-ct.nrrd'):
+                patient_id = case.replace('-ct.nrrd', '')
+            else:
+                continue
+                
+            if os.path.exists(os.path.join(root_path, 'train', case.replace('-ct.nrrd', '-seg.nrrd'))):
+                data.append({
+                            'image':os.path.join(root_path, 'train', case),
+                            'mask':os.path.join(root_path, 'train', case.replace('-ct.nrrd', '-seg.nrrd')),
+                            'label':labels,
+                            'modality':modality,
+                            'dataset':dataset,
+                            'official_split': 'train',
+                            'patient_id':patient_id,
+                        })
+            else:
+                continue
+            
+        Path(f"{save_path}").mkdir(exist_ok=True, parents=True)        
+        with open(f"{save_path}/{dataset}.jsonl", 'w') as f:
+            for datum in data:
+                f.write(json.dumps(datum)+'\n')
+     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset_name')

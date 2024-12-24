@@ -1,0 +1,18 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "sacrum": 1,
+        "left hip": 2,
+        "right hip": 3,
+        "lumbar vertebrae": 4
+    },
+    "numTraining": 94,
+    "file_ending": ".nii.gz",
+    "name": "CTPelvic1K",
+    "reference": "none",
+    "description": "CTPelvic1K",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

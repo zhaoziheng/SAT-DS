@@ -1,0 +1,16 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "pancreas": 1,
+        "pancreas tumor": 2
+    },
+    "numTraining": 225,
+    "file_ending": ".nii.gz",
+    "name": "MSDPancreas",
+    "reference": "none",
+    "description": "MSDPancreas",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

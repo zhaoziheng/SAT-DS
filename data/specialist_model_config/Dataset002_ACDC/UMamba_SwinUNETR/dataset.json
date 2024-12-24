@@ -1,0 +1,17 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "left heart ventricle": 1,
+        "right heart ventricle": 2,
+        "myocardium": 3
+    },
+    "numTraining": 200,
+    "file_ending": ".nii.gz",
+    "name": "ACDC",
+    "reference": "none",
+    "description": "ACDC",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}
