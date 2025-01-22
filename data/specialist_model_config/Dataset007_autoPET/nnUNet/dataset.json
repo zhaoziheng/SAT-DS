@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "PET"
+    },
+    "labels": {
+        "background": 0,
+        "tumor": 1
+    },
+    "numTraining": 413,
+    "file_ending": ".nii.gz",
+    "name": "autoPET",
+    "reference": "none",
+    "description": "autoPET",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "stroke": 1
+    },
+    "numTraining": 564,
+    "file_ending": ".nii.gz",
+    "name": "ATLASR2",
+    "reference": "none",
+    "description": "ATLASR2",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

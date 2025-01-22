@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "prostate": 1
+    },
+    "numTraining": 40,
+    "file_ending": ".nii.gz",
+    "name": "PROMISE12",
+    "reference": "none",
+    "description": "PROMISE12",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

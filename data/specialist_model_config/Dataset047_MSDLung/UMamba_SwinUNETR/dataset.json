@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "lung tumor": 1
+    },
+    "numTraining": 50,
+    "file_ending": ".nii.gz",
+    "name": "MSDLung",
+    "reference": "none",
+    "description": "MSDLung",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

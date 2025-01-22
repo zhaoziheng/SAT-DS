@@ -1,0 +1,15 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "white_matter_hyperintensities": 1
+    },
+    "numTraining": 60,
+    "file_ending": ".nii.gz",
+    "name": "WMHSegmentationChallenge",
+    "reference": "none",
+    "description": "WMHSegmentationChallenge",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

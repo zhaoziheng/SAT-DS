@@ -1,0 +1,18 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "liver": 1,
+        "right kidney": 2,
+        "left kidney": 3,
+        "spleen": 4
+    },
+    "numTraining": 48,
+    "file_ending": ".nii.gz",
+    "name": "CHAOSMR",
+    "reference": "none",
+    "description": "CHAOSMR",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

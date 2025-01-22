@@ -1,0 +1,40 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "cervical vertebrae 1 (c1)": 1,
+        "cervical vertebrae 2 (c2)": 2,
+        "cervical vertebrae 3 (c3)": 3,
+        "cervical vertebrae 4 (c4)": 4,
+        "cervical vertebrae 5 (c5)": 5,
+        "cervical vertebrae 6 (c6)": 6,
+        "cervical vertebrae 7 (c7)": 7,
+        "thoracic vertebrae 1 (t1)": 8,
+        "thoracic vertebrae 2 (t2)": 9,
+        "thoracic vertebrae 3 (t3)": 10,
+        "thoracic vertebrae 4 (t4)": 11,
+        "thoracic vertebrae 5 (t5)": 12,
+        "thoracic vertebrae 6 (t6)": 13,
+        "thoracic vertebrae 7 (t7)": 14,
+        "thoracic vertebrae 8 (t8)": 15,
+        "thoracic vertebrae 9 (t9)": 16,
+        "thoracic vertebrae 10 (t10)": 17,
+        "thoracic vertebrae 11 (t11)": 18,
+        "thoracic vertebrae 12 (t12)": 19,
+        "lumbar vertebrae 1 (l1)": 20,
+        "lumbar vertebrae 2 (l2)": 21,
+        "lumbar vertebrae 3 (l3)": 22,
+        "lumbar vertebrae 4 (l4)": 23,
+        "lumbar vertebrae 5 (l5)": 24,
+        "lumbar vertebrae 6 (l6)": 25,
+        "thoracic vertebrae 13 (t13)": 26
+    },
+    "numTraining": 77,
+    "file_ending": ".nii.gz",
+    "name": "VerSe",
+    "reference": "none",
+    "description": "VerSe",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

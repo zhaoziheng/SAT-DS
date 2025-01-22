@@ -1,0 +1,39 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "sacrum": 1,
+        "C1": 2,
+        "C2": 3,
+        "C3": 4,
+        "C4": 5,
+        "C5": 6,
+        "C6": 7,
+        "C7": 8,
+        "L1": 9,
+        "L2": 10,
+        "L3": 11,
+        "L4": 12,
+        "L5": 13,
+        "T1": 14,
+        "T10": 15,
+        "T11": 16,
+        "T12": 17,
+        "T2": 18,
+        "T3": 19,
+        "T4": 20,
+        "T5": 21,
+        "T6": 22,
+        "T7": 23,
+        "T8": 24,
+        "T9": 25
+    },
+    "numTraining": 962,
+    "file_ending": ".nii.gz",
+    "name": "TotalSegmentatorVertebrae",
+    "reference": "none",
+    "description": "TotalSegmentatorVertebrae",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

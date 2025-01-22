@@ -1,0 +1,17 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "left lung": 1,
+        "right lung": 2,
+        "covid-19 infection": 3
+    },
+    "numTraining": 8,
+    "file_ending": ".nii.gz",
+    "name": "COVID19",
+    "reference": "none",
+    "description": "COVID19",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

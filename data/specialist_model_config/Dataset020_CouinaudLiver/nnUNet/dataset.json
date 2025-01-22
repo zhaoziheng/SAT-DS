@@ -1,0 +1,22 @@
+{
+    "channel_names": {
+        "0": "CT"
+    },
+    "labels": {
+        "background": 0,
+        "caudate lobe": 1,
+        "left lateral superior segment of liver": 2,
+        "left lateral inferior segment of liver": 3,
+        "left medial segment of liver": 4,
+        "right anterior inferior segment of liver": 5,
+        "right posterior inferior segment of liver": 6,
+        "right posterior superior segment of liver": 7,
+        "right anterior superior segment of liver": 8
+    },
+    "numTraining": 126,
+    "file_ending": ".nii.gz",
+    "name": "CouinaudLiver",
+    "reference": "none",
+    "description": "CouinaudLiver",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

@@ -1,0 +1,18 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "femur_bone": 1,
+        "femur_cartilage": 2,
+        "tibia_bone": 3,
+        "tibia_cartilage": 4
+    },
+    "numTraining": 59,
+    "file_ending": ".nii.gz",
+    "name": "SKI10",
+    "reference": "none",
+    "description": "SKI10",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}

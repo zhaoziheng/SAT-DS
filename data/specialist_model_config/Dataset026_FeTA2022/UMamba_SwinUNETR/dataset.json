@@ -1,0 +1,21 @@
+{
+    "channel_names": {
+        "0": "MR"
+    },
+    "labels": {
+        "background": 0,
+        "external cerebrospinal fluid": 1,
+        "grey matter": 2,
+        "white matter": 3,
+        "brain ventricle": 4,
+        "cerebellum": 5,
+        "deep grey matter": 6,
+        "brainstem": 7
+    },
+    "numTraining": 64,
+    "file_ending": ".nii.gz",
+    "name": "FeTA2022",
+    "reference": "none",
+    "description": "FeTA2022",
+    "overwrite_image_reader_writer": "NibabelIOWithReorient"
+}
