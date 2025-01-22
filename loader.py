@@ -1504,9 +1504,9 @@ class Loader_Wrapper():
         'left anterior orbital gyrus',
         'right inferior frontal gyrus',
         'left inferior frontal gyrus',
-        'right superior frontal gyrus',
-        'left superior frontal gyrus',
-        'right postcentral gyrus',
+        'right superior frontal gyrus', # 
+        'left superior frontal gyrus',  
+        'right postcentral gyrus',  # 59
         'left postcentral gyrus',
         'right superior parietal gyrus',
         'left superior parietal gyrus',
@@ -1530,7 +1530,7 @@ class Loader_Wrapper():
         'left pre-subgenual frontal cortex',
         'right superior temporal gyrus anterior part',
         'left superior temporal gyrus anterior part',
-        'right supramarginal gyrus',
+        'right supramarginal gyrus',    # 83
         'left supramarginal gyrus',
         'right insula anterior short gyrus',
         'left insula anterior short gyrus',
