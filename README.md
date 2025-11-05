@@ -242,14 +242,15 @@ Similarly, you can customize a benchmark with arbitrary datasets you want by mer
 # Citation
 If you use this code for your research or project, please cite:
 ```
-@misc{zhao2025largevocabularysegmentationmedicalimages,
-      title={Large-Vocabulary Segmentation for Medical Images with Text Prompts}, 
-      author={Ziheng Zhao and Yao Zhang and Chaoyi Wu and Xiaoman Zhang and Xiao Zhou and Ya Zhang and Yanfeng Wang and Weidi Xie},
-      year={2025},
-      eprint={2312.17183},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV},
-      url={https://arxiv.org/abs/2312.17183}, 
+@article{zhao2025large,
+  title={Large-vocabulary segmentation for medical images with text prompts},
+  author={Zhao, Ziheng and Zhang, Yao and Wu, Chaoyi and Zhang, Xiaoman and Zhou, Xiao and Zhang, Ya and Wang, Yanfeng and Xie, Weidi},
+  journal={NPJ Digital Medicine},
+  volume={8},
+  number={1},
+  pages={566},
+  year={2025},
+  publisher={Nature Publishing Group UK London}
 }
 ```
 And if you use any of these datasets in SAT-DS, please cite the corresponding papers. A summerized citation information can be found in `citation.bib` .
